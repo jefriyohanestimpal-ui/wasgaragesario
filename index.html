@@ -593,10 +593,12 @@ async function loadConfig(){
     const r = await fetch('/api/config');
     if(!r.ok) throw new Error('Config tidak tersedia');
     const cfg = await r.json();
-    SUPABASE_URL = cfg.url || '';
-    SUPABASE_ANON_KEY = cfg.key || '';
+    if(cfg.url) SUPABASE_URL = cfg.url;
+    if(cfg.key) SUPABASE_ANON_KEY = cfg.key;
+    console.log('[Config] Berhasil load dari server');
   }catch(e){
-    console.error('Gagal load config:', e.message);
+    // Fallback: gunakan nilai hardcoded di baris 588-589
+    console.warn('[Config] Menggunakan konfigurasi bawaan:', e.message);
   }
 }
 
@@ -1049,6 +1051,23 @@ async function doLogin(){
     if(!match){showLoginErr('Password salah.');showLoading(false);return;}
     currentUser=data;
     localStorage.setItem('wg_user',JSON.stringify({id:data.id,username:data.username,nama:data.nama,role:data.role}));
+
+    // ── CATAT LOGIN KE login_log ──
+    try{
+      await sb.from('login_log').insert({
+        id: crypto.randomUUID(),
+        user_id: data.id,
+        username: data.username,
+        nama: data.nama,
+        role: data.role,
+        waktu_login: new Date().toISOString(),
+        keterangan: 'Login berhasil'
+      });
+    }catch(logErr){
+      console.warn('[login_log] Gagal mencatat login:', logErr);
+    }
+    // ─────────────────────────────
+
     // Tampilkan success neon sebentar
     const notifOk=document.getElementById('login-notif');
     if(notifOk){
