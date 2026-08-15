@@ -2154,7 +2154,7 @@ function renderMekTags(){
   if(!_woMekIds.length){el.innerHTML='<span style="color:var(--text3);font-size:13px">-- Pilih Mekanik --</span>';return;}
   const allCbs=document.querySelectorAll('#f-wo-mek-dd input');
   const nMap={};allCbs.forEach(c=>nMap[c.value]=c.dataset.nama);
-  el.innerHTML=_woMekIds.map(id=>`<span style="display:inline-flex;align-items:center;gap:4px;background:var(--orange);color:#fff;border-radius:5px;padding:2px 8px;font-size:12px">${nMap[id]||id}<i class="ti ti-x" style="cursor:pointer;font-size:11px" onclick="removeMek('${id}');event.stopPropagation()"></i></span>`).join('');
+  el.innerHTML=_woMekIds.map(id=>`<span style="display:inline-flex;align-items:center;gap:4px;background:transparent;color:var(--orange)  Atau kalau mau saya langsung ubah di file — upload file HTML terbaru Anda dan saya ganti sekarang. Lebih cepat dan pasti tepat sasaran.  Menjalankan 5 perintah, membaca file · 1 catatan  Selesai! Perubahan yang diterapkan:  Sebelum: latar belakang orange penuh  #f98c1e → teks putih  Sesudah: latar sangat tipis rgba(194,87,10,0.12) → teks orange  Tampilannya sekarang lebih bersih — kode tetap terlihat jelas dengan warna orange tapi tanpa kotak orange yang mencolok. Perubahan ini berlaku di semua tempat yang pakai tag <code> seperti No. WO, No. Plat, dan Kode Barang.  Upload ke GitHub seperti biasa.  Index Kode · HTML ;border-radius:5px;padding:2px 8px;font-size:12px">${nMap[id]||id}<i class="ti ti-x" style="cursor:pointer;font-size:11px" onclick="removeMek('${id}');event.stopPropagation()"></i></span>`).join('');
 }
 
 function onKendChange(){
