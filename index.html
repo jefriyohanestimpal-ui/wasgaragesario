@@ -2101,7 +2101,7 @@ async function openWO(wo=null){
         <tbody id="body-parts"></tbody>
       </table></div>
       <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-        <div class="form-group" style="flex:1;min-width:180px"><label class="form-label">Biaya Jasa (Rp)</label><input id="f-wo-jasa" class="form-input" type="number" value="${wo?.biaya_jasa||0}" oninput="hitungTotalWO()"/></div>
+        <div class="form-group" style="flex:1;min-width:180px"><label class="form-label">Total Biaya Jasa (Rp)</label><input id="f-wo-jasa" class="form-input" type="number" value="${wo?.biaya_jasa||0}" oninput="hitungTotalWO()"/></div>
         <div class="form-group" style="flex:1;min-width:180px"><label class="form-label">Diskon (Rp)</label><input id="f-wo-diskon" class="form-input" type="number" value="${wo?.diskon||0}" oninput="hitungTotalWO()"/></div>
       </div>
       <div style="text-align:right;padding:10px;background:var(--bg3);border-radius:8px;margin-top:8px">
