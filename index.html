@@ -5216,5 +5216,48 @@ window.addEventListener('DOMContentLoaded', async()=>{
 });
 
 </script>
+
+  <!-- MULAI KODE PENYEMBUNYIAN KOLOM ADMIN -->
+<style>
+    /* CSS untuk menyembunyikan kolom Harga Beli, Harga Jual, dan Aksi */
+    .hide-admin-col {
+        display: none !important;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Ambil data user dari localStorage 
+    // PENTING: Sesuaikan 'currentUser' dengan nama key localStorage yang digunakan sistem login Anda
+    const userData = JSON.parse(localStorage.getItem('currentUser') || localStorage.getItem('user') || '{}');
+    const userRole = (userData.role || userData.level || userData.hak_akses || 'user').toLowerCase();
+    
+    // 2. Cek apakah user BUKAN admin/owner
+    const isAdmin = userRole === 'admin' || userRole === 'owner' || userRole === 'administrator';
+    
+    if (!isAdmin) {
+        // Sembunyikan Header Kolom (th)
+        const headers = document.querySelectorAll('thead th');
+        headers.forEach((th, index) => {
+            // Index 6 = Harga Beli, 7 = Harga Jual, 8 = Aksi (berdasarkan urutan di gambar)
+            if (index === 6 || index === 7 || index === 8) {
+                th.classList.add('hide-admin-col');
+            }
+        });
+        
+        // Sembunyikan Data Kolom (td) di setiap baris
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            cells.forEach((td, index) => {
+                if (index === 6 || index === 7 || index === 8) {
+                    td.classList.add('hide-admin-col');
+                }
+            });
+        });
+    }
+});
+</script>
+<!-- SELESAI KODE PENYEMBUNYIAN KOLOM ADMIN -->
 </body>
 </html>
