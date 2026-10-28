@@ -5216,5 +5216,56 @@ window.addEventListener('DOMContentLoaded', async()=>{
 });
 
 </script>
+
+<style>
+    /* Class untuk menyembunyikan kolom */
+    .kolom-terbatas {
+        display: none !important;
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Ambil Data User yang Login
+    // PENTING: Sesuaikan 'currentUser' dengan key localStorage yang Anda pakai saat login Supabase
+    const userData = JSON.parse(localStorage.getItem('currentUser') || localStorage.getItem('user') || '{}');
+    const userRole = (userData.role || userData.level || 'admin').toLowerCase(); 
+
+    // 2. Cek apakah user BUKAN Owner
+    const isOwner = userRole === 'owner';
+
+    if (!isOwner) {
+        // Jika Admin/Mekanik, cari tabel stok gudang
+        // Sesuaikan selector 'table' jika tabel Anda memiliki ID spesifik, misal: document.querySelector('#tabelStok')
+        const table = document.querySelector('table'); 
+        
+        if (table) {
+            const headers = table.querySelectorAll('thead th');
+            const indicesToHide = [];
+
+            // Cari index kolom berdasarkan nama Header
+            headers.forEach((th, index) => {
+                const headerText = th.innerText.toUpperCase().trim();
+                // Sembunyikan jika header adalah HARGA BELI, HARGA JUAL, atau AKSI
+                if (headerText === 'HARGA BELI' || headerText === 'HARGA JUAL' || headerText === 'AKSI') {
+                    indicesToHide.push(index);
+                    th.classList.add('kolom-terbatas');
+                }
+            });
+
+            // Sembunyikan data (td) di setiap baris berdasarkan index yang ditemukan
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                indicesToHide.forEach(index => {
+                    if (cells[index]) {
+                        cells[index].classList.add('kolom-terbatas');
+                    }
+                });
+            });
+        }
+    }
+});
+</script>  
 </body>
 </html>
