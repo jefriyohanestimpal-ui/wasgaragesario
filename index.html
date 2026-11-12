@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta name="theme-color" content="#d32f2f"/>
+<meta name="theme-color" content="#f3e6ff"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <title>WAS GARAGE</title>
@@ -493,6 +493,169 @@ code{font-family:monospace;background:none;color:var(--orange);padding:0;border-
 .garage-login-notif.success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;}
 .garage-login-notif.error{background:#ffebee;color:#c62828;border:1px solid #ef9a9a;}
 
+
+/* ============================================================
+   GLASSMORPHISM THEME - WAS GARAGE (override, letakkan paling akhir)
+   ============================================================ */
+@media screen{
+:root{
+--primary:#f95023;--primary2:#ff7a45;--primary-dim:rgba(249,80,35,.14);
+--orange:#f95023;--orange2:#ff7a45;--orange-dim:rgba(249,80,35,.14);
+--bg:transparent;--bg2:rgba(255,255,255,.45);--bg3:rgba(255,255,255,.34);
+--input-bg:rgba(255,255,255,.58);--border:rgba(255,255,255,.62);--border2:rgba(255,255,255,.78);
+--text:#0b1b2b;--text2:#33475b;--text3:#5f7185;
+--green:#1b7a2f;--red:#c62828;--blue:#1565c0;--yellow:#a85f00;
+--glass-bg:linear-gradient(135deg,rgba(255,255,255,.58),rgba(255,255,255,.22));
+--glass-blur:blur(18px) saturate(170%);
+--glass-border:1px solid rgba(255,255,255,.62);
+--glass-shadow:0 8px 32px rgba(31,38,135,.17),inset 0 1px 0 rgba(255,255,255,.7);
+--shadow:0 8px 32px rgba(31,38,135,.14);--shadow2:0 12px 40px rgba(249,80,35,.2);
+--radius:12px;--radius2:18px;
+}
+html{background:#f3e6ff;}
+html,body{background:transparent;color:var(--text);}
+html{background-color:#f3e6ff;}
+
+/* ---------- Latar mesh gradient bergerak ---------- */
+body::before,body::after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;}
+body::before{
+background:
+radial-gradient(circle at 15% 20%,#ff8a5c 0,transparent 38%),
+radial-gradient(circle at 85% 12%,#ffd86b 0,transparent 36%),
+radial-gradient(circle at 78% 82%,#6fb7ff 0,transparent 40%),
+radial-gradient(circle at 18% 85%,#c08bff 0,transparent 38%),
+linear-gradient(135deg,#ffe3d6,#e3e9ff);
+animation:glassDrift 22s ease-in-out infinite alternate;}
+body::after{
+background:
+radial-gradient(circle at 60% 40%,rgba(255,255,255,.55) 0,transparent 18%),
+radial-gradient(circle at 30% 60%,rgba(249,80,35,.35) 0,transparent 20%),
+radial-gradient(circle at 80% 55%,rgba(111,183,255,.45) 0,transparent 18%);
+filter:blur(30px);animation:glassDrift2 28s ease-in-out infinite alternate;}
+@keyframes glassDrift{from{transform:translate3d(-3%,-2%,0) rotate(0) scale(1);}to{transform:translate3d(3%,3%,0) rotate(8deg) scale(1.08);}}
+@keyframes glassDrift2{from{transform:translate3d(4%,2%,0) scale(1.05);}to{transform:translate3d(-4%,-3%,0) scale(.95);}}
+@media(prefers-reduced-motion:reduce){body::before,body::after{animation:none;}}
+
+/* ---------- Tata letak: sidebar & topbar melayang ---------- */
+#app{background:transparent;position:relative;z-index:1;gap:12px;padding:12px;}
+#sidebar{
+background:linear-gradient(160deg,rgba(48,36,110,.56),rgba(22,16,66,.44));
+-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);
+border:1px solid rgba(255,255,255,.28);border-radius:22px;
+box-shadow:0 10px 40px rgba(31,38,135,.32),inset 0 1px 0 rgba(255,255,255,.35);}
+.sb-logo{border-bottom:1px solid rgba(255,255,255,.18);}
+.sb-logo-icon{background:linear-gradient(135deg,#ff8a5c,#f95023)!important;box-shadow:0 4px 14px rgba(249,80,35,.5);border-radius:11px;}
+.sb-logo-sub{color:rgba(255,255,255,.62);}
+.nav-group-label{color:rgba(255,255,255,.5);}
+.nav-item{color:rgba(255,255,255,.82);border-radius:12px;}
+.nav-item:hover{background:rgba(255,255,255,.16);color:#fff;}
+.nav-item.active{background:linear-gradient(135deg,#ff8a5c,#f95023);color:#fff;box-shadow:0 4px 16px rgba(249,80,35,.5),inset 0 1px 0 rgba(255,255,255,.4);}
+.sb-user{border-top:1px solid rgba(255,255,255,.18);}
+.sb-user-role{color:rgba(255,255,255,.6);}
+.sb-user-av{background:linear-gradient(135deg,#ff8a5c,#f95023);}
+#sidebar-overlay.show{background:rgba(30,25,70,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+#main{background:transparent;min-width:0;}
+#topbar{
+background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+border:var(--glass-border);border-radius:var(--radius2);box-shadow:var(--glass-shadow);margin-bottom:12px;}
+#topbar-title{color:var(--text);}
+.topbar-badge,.topbar-btn{background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.75);color:var(--text2);border-radius:11px;
+-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+.topbar-btn:hover{background:rgba(255,255,255,.82);color:var(--primary);}
+#offline-bar{border-radius:14px;margin-bottom:10px;background:rgba(198,40,40,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+#content{padding:4px 4px 8px;}
+
+/* ---------- Kartu / panel kaca ---------- */
+.stat-card,.table-wrap{
+background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+border:var(--glass-border);box-shadow:var(--glass-shadow);}
+.stat-card{border-radius:var(--radius2);}
+.stat-card::before{height:4px;opacity:.9;}
+.stat-label{color:var(--text2);}
+.stat-icon{color:rgba(11,27,43,.12);opacity:1;}
+.table-wrap{border-radius:var(--radius2);}
+thead{background:rgba(255,255,255,.34);}
+th{color:var(--text2);border-bottom:1px solid rgba(255,255,255,.6);}
+td{border-bottom:1px solid rgba(255,255,255,.55);}
+tr:hover td{background:rgba(255,255,255,.42);}
+.parts-table td{border-bottom:1px solid rgba(255,255,255,.55);}
+.divider{background:rgba(255,255,255,.6);}
+.page-title,.section-hdr h2{color:var(--text);}
+
+/* ---------- Tombol ---------- */
+.btn{border-radius:12px;}
+.btn-primary{background:linear-gradient(135deg,#ff8a5c,#f95023);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2);
+box-shadow:0 6px 18px rgba(249,80,35,.36),inset 0 1px 0 rgba(255,255,255,.45);}
+.btn-primary:hover{background:linear-gradient(135deg,#ffa07a,#ff6a3d);transform:translateY(-1px);box-shadow:0 10px 24px rgba(249,80,35,.45),inset 0 1px 0 rgba(255,255,255,.55);}
+.btn-outline{background:rgba(255,255,255,.42);border:1.5px solid rgba(255,255,255,.82);color:var(--text2);box-shadow:0 2px 10px rgba(31,38,135,.08);}
+.btn-outline:hover{background:rgba(255,255,255,.74);border-color:#fff;color:var(--primary);}
+.btn-danger{background:linear-gradient(135deg,#ef5350,#c62828);box-shadow:0 6px 16px rgba(198,40,40,.3);}
+.btn-danger:hover{background:linear-gradient(135deg,#f66a67,#d32f2f);}
+.btn-success{background:linear-gradient(135deg,#66bb6a,#2e7d32);box-shadow:0 6px 16px rgba(46,125,50,.3);}
+
+/* ---------- Form ---------- */
+.form-input,.search-input{background:var(--input-bg);border:1.5px solid rgba(255,255,255,.82);border-radius:12px;color:var(--text);box-shadow:inset 0 2px 6px rgba(31,38,135,.06);}
+.form-input::placeholder,.search-input::placeholder{color:var(--text3);}
+.form-input:focus,.search-input:focus{border-color:var(--primary);background:rgba(255,255,255,.82);box-shadow:0 0 0 4px rgba(249,80,35,.16);}
+.form-input:disabled{background:rgba(255,255,255,.3);}
+.form-label{color:var(--text2);}
+.tabs{border-bottom:2px solid rgba(255,255,255,.6);}
+.badge{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.55);}
+.badge-gray{background:rgba(255,255,255,.5);}
+
+/* ---------- Modal ---------- */
+.modal-overlay{background:rgba(30,25,70,.34);-webkit-backdrop-filter:blur(10px) saturate(130%);backdrop-filter:blur(10px) saturate(130%);}
+.modal{background:linear-gradient(135deg,rgba(255,255,255,.74),rgba(255,255,255,.46));
+-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);
+border:1px solid rgba(255,255,255,.78);box-shadow:0 24px 70px rgba(31,38,135,.35),inset 0 1px 0 rgba(255,255,255,.9);border-radius:22px;}
+.modal-header{background:rgba(255,255,255,.36);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.65);}
+.modal-footer{border-top:1px solid rgba(255,255,255,.65);}
+.modal-close{background:rgba(255,255,255,.62);}
+.modal-close:hover{background:var(--red);color:#fff;}
+
+/* ---------- Toast & loading ---------- */
+.toast-item{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.45);border-radius:14px;}
+.toast-success{background:rgba(46,125,50,.84);}
+.toast-error{background:rgba(198,40,40,.84);}
+.toast-info{background:rgba(38,50,56,.84);}
+#loading-overlay{background:rgba(30,25,70,.26);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(11,27,43,.28);border-radius:10px;}
+
+/* ---------- Halaman login ---------- */
+#login-page{background:transparent!important;}
+#login-page>div:first-child:not(.garage-login-wrap){display:none!important;}
+.light-beam,.light-fixture,.tube,.bracket{display:none!important;}
+.garage-login-title{color:var(--text);text-shadow:0 2px 14px rgba(255,255,255,.7);}
+.garage-login-subtitle{color:#d93a10;}
+.garage-login-tagline{color:var(--text2);}
+.garage-login-icon{background:linear-gradient(135deg,#ff8a5c,#f95023)!important;border:1px solid rgba(255,255,255,.6);box-shadow:0 10px 30px rgba(249,80,35,.45),inset 0 1px 0 rgba(255,255,255,.6);}
+.garage-login-card{background:linear-gradient(135deg,rgba(255,255,255,.64),rgba(255,255,255,.28));
+-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+border:1px solid rgba(255,255,255,.78);border-radius:24px;box-shadow:0 24px 70px rgba(31,38,135,.3),inset 0 1px 0 rgba(255,255,255,.9);}
+.garage-login-card-header{background:rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.6);}
+.garage-login-label{color:var(--text2);}
+#login-notif+.garage-login-field{margin-top:22px;}
+.garage-login-input{background:rgba(255,255,255,.58);border:1.5px solid rgba(255,255,255,.88);color:var(--text);border-radius:12px;box-shadow:inset 0 2px 6px rgba(31,38,135,.06);}
+.garage-login-input:focus{background:rgba(255,255,255,.88);border-color:var(--primary);box-shadow:0 0 0 4px rgba(249,80,35,.16);}
+.garage-login-btn{background:linear-gradient(135deg,#ff8a5c,#f95023);border-radius:12px;color:#fff;box-shadow:0 8px 22px rgba(249,80,35,.4),inset 0 1px 0 rgba(255,255,255,.5);}
+.garage-login-btn:hover{background:linear-gradient(135deg,#ffa07a,#ff6a3d);box-shadow:0 12px 28px rgba(249,80,35,.5);}
+.garage-login-notif.success{background:rgba(232,245,233,.78);}
+.garage-login-notif.error{background:rgba(255,235,238,.78);}
+
+/* ---------- Mobile ---------- */
+@media(max-width:768px){
+#app{padding:8px;gap:0;}
+#sidebar{border-radius:0 22px 22px 0;margin:0;}
+#topbar{margin-bottom:8px;}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+:root{--glass-bg:rgba(255,255,255,.88);}
+.modal{background:rgba(255,255,255,.95);}
+#sidebar{background:rgba(40,30,90,.92);}
+}
+}
+/* ============ AKHIR GLASSMORPHISM THEME ============ */
 </style>
 </head>
 <body>
